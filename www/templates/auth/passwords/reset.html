@@ -1,0 +1,64 @@
+<ion-view title="Reset Password" ng-controller="passwordResetCtrl">
+    <ion-content overflow-scroll="true" padding="true" class="has-header">
+        <div class="alert alert-success" ng-if="Session.hasOwnProperty('status')">
+            {{ Successes.status }}
+        </div>
+        <form class="list"
+              role="form"
+              ng-submit="onSubmit()"
+              novalidate="novalidate"
+              ng-hide="submitted">
+            <ion-list>
+                <label class="item item-input"
+                       ng-class="(Errors.hasOwnProperty('email')) ? 'has-error' : ''"
+                       name="email">
+                    <span class="input-label">E-Mail Address</span>
+                    <input type="email"
+                           ng-model="formModel.email"
+                           id="email"
+                           required="required"
+                           ng-maxlength="255">
+                </label>
+                <span class="field-error" ng-if="Errors.hasOwnProperty('email')">
+                    <strong>{{ Errors.email }}</strong>
+                </span>
+                <label class="item item-input"
+                       ng-class="(Errors.hasOwnProperty('password')) ? 'has-error' : ''"
+                       name="password">
+                    <span class="input-label">Password</span>
+                    <input type="password"
+                           ng-model="formModel.password"
+                           id="password"
+                           required="required"
+                           ng-minlength="6">
+                </label>
+                <span class="field-error" ng-if="Errors.hasOwnProperty('password')">
+                    <strong>{{ Errors.password }}</strong>
+                </span>
+                <label class="item item-input"
+                       ng-class="(Errors.hasOwnProperty('password_confirmation')) ? 'has-error' : ''"
+                       name="password_confirmation">
+                    <span class="input-label">Confirm Password</span>
+                    <input type="password"
+                           ng-model="formModel.password_confirmation"
+                           ng-pattern="formModel.password"
+                           ng-pattern-err-type="confirmed"
+                           id="password_confirmation"
+                           required="required"
+                           ng-minlength="6">
+                </label>
+                <span class="field-error" ng-if="Errors.hasOwnProperty('password_confirmation')">
+                    <strong>{{ Errors.password_confirmation }}</strong>
+                </span>
+            </ion-list>
+            <button id="resetPassword-button"
+                    class="button button-positive  button-block icon-left ion-refresh"
+                    ladda="submitting"
+                    data-style="expand-right"
+                    type="submit">
+                <span ng-show="submitting">Resetting Password</span>
+                <span ng-show="!submitting">Reset Password</span>
+            </button>
+        </form>
+    </ion-content>
+</ion-view>

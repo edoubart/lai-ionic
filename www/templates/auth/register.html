@@ -1,0 +1,93 @@
+<ion-view title="Register" ng-controller="registerCtrl">
+    <ion-content overflow-scroll="true" padding="true" class="has-header">
+        <form class="list"
+              role="form"
+              ng-submit="onSubmit()"
+              novalidate="novalidate"
+              ng-hide="submitted">
+            <ion-list>
+
+                <a href=""
+                   class="button button-block btn-facebook"
+                   ng-click="authenticate('facebook')">
+                    <span class="fa fa-facebook"></span>
+                    Sign in with Facebook
+                </a>
+
+                <a href=""
+                   class="button button-block btn-google"
+                   ng-click="authenticate('google')">
+                    <span class="fa fa-google"></span>
+                    Sign in with Google
+                </a>
+
+                <div class="item item-divider">
+                    or
+                </div>
+
+                <label class="item item-input"
+                       ng-class="(Errors.hasOwnProperty('name')) ? 'has-error' : ''"
+                       name="name">
+                    <span class="input-label">Name</span>
+                    <input type="text"
+                           ng-model="formModel.name"
+                           id="name"
+                           required="required"
+                           ng-maxlength="255">
+                </label>
+                <span class="field-error" ng-if="Errors.hasOwnProperty('name')">
+                    <strong>{{ Errors.name[0] }}</strong>
+                </span>
+                <label class="item item-input"
+                       ng-class="(Errors.hasOwnProperty('email')) ? 'has-error' : ''"
+                       name="email">
+                    <span class="input-label">E-mail Address</span>
+                    <input type="email"
+                           ng-model="formModel.email"
+                           id="email"
+                           required="required"
+                           ng-maxlength="255">
+                </label>
+                <span class="field-error" ng-if="Errors.hasOwnProperty('email')">
+                    <strong>{{ Errors.email[0] }}</strong>
+                </span>
+                <label class="item item-input"
+                       ng-class="(Errors.hasOwnProperty('password')) ? 'has-error' : ''"
+                       name="password">
+                    <span class="input-label">Password</span>
+                    <input type="password"
+                           ng-model="formModel.password"
+                           id="password"
+                           required="required"
+                           ng-minlength="6">
+                </label>
+            <span class="field-error" ng-if="Errors.hasOwnProperty('password')">
+                <strong>{{ Errors.password[0] }}</strong>
+            </span>
+            </ion-list>
+            <label class="item item-input"
+                   ng-class="(Errors.hasOwnProperty('password_confirmation')) ? 'has-error' : ''"
+                   name="password_confirmation">
+                <span class="input-label">Confirm Password</span>
+                <input type="password"
+                       ng-model="formModel.password_confirmation"
+                       ng-pattern="formModel.password"
+                       ng-pattern-err-type="confirmed"
+                       id="password_confirmation"
+                       required="required"
+                       ng-minlength="6">
+            </label>
+            <span class="field-error" ng-if="Errors.hasOwnProperty('password_confirmation')">
+                <strong>{{ Errors.password_confirmation[0] }}</strong>
+            </span>
+            <button id="register-button"
+                    class="button button-positive button-block icon-left ion-person"
+                    ladda="submitting"
+                    data-style="expand-right"
+                    type="submit">
+                <span ng-show="submitting">Registering</span>
+                <span ng-show="!submitting">Register</span>
+            </button>
+        </form>
+    </ion-content>
+</ion-view>

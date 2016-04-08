@@ -1,0 +1,38 @@
+<ion-view title="Reset Password" ng-controller="passwordEmailCtrl">
+    <ion-content overflow-scroll="true" padding="true" class="has-header">
+        <div class="alert alert-success" ng-if="Session.hasOwnProperty('status')">
+            {{ Successes.status }}
+        </div>
+        <form class="list"
+              role="form"
+              ng-submit="onSubmit()"
+              novalidate="novalidate"
+              ng-hide="submitted">
+            <ion-list>
+                <label class="item item-input"
+                       ng-class="(Errors.hasOwnProperty('email')) ? 'has-error' : ''"
+                       name="email">
+                    <span class="input-label">E-Mail Address</span>
+                    <input type="email"
+                           class="form-control"
+                           ng-model="formModel.email"
+                           id="email"
+                           required="required"
+                           ng-maxlength="255">
+                </label>
+            <span class="field-error" ng-if="Errors.hasOwnProperty('email')">
+                <strong>{{ Errors.email }}</strong>
+            </span>
+            </ion-list>
+            <div class="spacer" style="height: 40px;"></div>
+            <button id="resetPassword-button"
+                    class="button button-positive  button-block icon-left ion-email"
+                    ladda="submitting"
+                    data-style="expand-right"
+                    type="submit">
+                <span ng-show="submitting">Sending Password Reset Link</span>
+                <span ng-show="!submitting">Send Password Reset Link</span>
+            </button>
+        </form>
+    </ion-content>
+</ion-view>
